@@ -13,21 +13,21 @@
 #include <time.h>   // UNIX時間取得用ヘッダファイル
 
 // キャラクターの構造体charaの宣言
-struct chara {
+typedef struct chara {
 	int  hp;    // 体力のメンバ変数（整数の変数）
 	int  atk;   // 攻撃力のメンバ変数（整数の変数）
 	char  *name; // 名前のメンバ変数（ポインタ変数）
 	int agi;
 	int crt;
 	int hit;
-};
+} chara_t;
 
 // 関数のプロトタイプ宣言
-struct chara randChara(void);
+chara_t randChara(void);
     // キャラクターの強さを乱数で決める関数
-void printChara(struct chara chr);
+void printChara(chara_t chr);
     // キャラクターの強さを表示する関数
-void attackChara(struct chara * chr, struct chara atk_chr);
+void attackChara(chara_t * chr, chara_t atk_chr);
     // キャラクターatk_chrがchrに攻撃する関数
 
 // メイン関数
@@ -37,7 +37,7 @@ int main(void)
 	    // 勇者の名前の候補
 	char *enemyName[3] = {"コウモリ", "ゾンビ", "大魔王"};
 	    // 敵の名前の候補
-	struct chara  yusha, enemy; // 勇者と敵の構造体変数を定義
+	chara_t  yusha, enemy; // 勇者と敵の構造体変数を定義
 
 	srand((unsigned int)time(NULL)); // 乱数の種の設定
 
@@ -91,11 +91,11 @@ int main(void)
 	}
 
 	return 0;  // 正常終了
-	}
+}
 
 // キャラクターの強さを乱数で決める関数
-struct chara randChara(void) {
-	struct chara chr;
+chara_t randChara(void) {
+	chara_t chr;
 	chr.name = "???";
 	chr.hp = rand()%200 + 1;
 	chr.atk = rand()%80 + 10;
@@ -106,12 +106,12 @@ struct chara randChara(void) {
 }
 
 // キャラクターの強さを表示する関数
-void printChara(struct chara chr) {
+void printChara(chara_t chr) {
 	printf("%s HP:%3d atk:%2d agi:%3d crt:%3d hit:%3d\n",chr.name,chr.hp,chr.atk,chr.agi,chr.crt,chr.hit);
 }
 
 // キャラクターatk_chrがchrに攻撃する関数
-void attackChara(struct chara * chr ,struct chara atk_chr ) {
+void attackChara(chara_t * chr ,chara_t atk_chr ) {
   
 	printf("%sの攻撃！\n",atk_chr.name);
 
